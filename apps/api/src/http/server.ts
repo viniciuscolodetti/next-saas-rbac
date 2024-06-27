@@ -12,6 +12,7 @@ import {
   type ZodTypeProvider,
 } from 'fastify-type-provider-zod'
 
+import { errorHandler } from './error-handler'
 import { authenticateWithPassword } from './routes/auth/authenticate-with-password'
 import { createAccount } from './routes/auth/create-account'
 import { getProfile } from './routes/auth/get-profile'
@@ -40,6 +41,8 @@ app.register(fastifyJwt, {
 
 app.setSerializerCompiler(serializerCompiler)
 app.setValidatorCompiler(validatorCompiler)
+
+app.setErrorHandler(errorHandler)
 
 app.register(fastifyCors)
 
