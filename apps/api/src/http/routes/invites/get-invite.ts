@@ -23,7 +23,7 @@ export async function getInvite(app: FastifyInstance) {
               id: z.string().uuid(),
               createdAt: z.date(),
               role: roleSchema,
-              email: z.string(),
+              email: z.string().email(),
               organization: z.object({
                 name: z.string(),
                 avatarUrl: z.string().url().nullable(),
