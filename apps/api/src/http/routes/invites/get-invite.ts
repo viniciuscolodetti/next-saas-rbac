@@ -9,11 +9,11 @@ import { BadRequestError } from '../_errors/bad-request-error'
 
 export async function getInvite(app: FastifyInstance) {
   app.withTypeProvider<ZodTypeProvider>().get(
-    'invite/:inviteId',
+    '/invite/:inviteId',
     {
       schema: {
         tags: ['invites'],
-        summary: 'Get a invite',
+        summary: 'Get an invite',
         params: z.object({
           inviteId: z.string().uuid(),
         }),
