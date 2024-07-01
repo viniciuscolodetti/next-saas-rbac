@@ -17,7 +17,7 @@ export async function verifyDomain(app: FastifyInstance) {
       '/organization/verify-domain',
       {
         schema: {
-          tags: ['organization'],
+          tags: ['organizations'],
           summary: 'Verify a organization domain in DNS',
           security: [{ bearerAuth: [] }],
           body: z.object({
