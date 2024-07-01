@@ -18,6 +18,7 @@ This project contains all the necessary boilerplate to setup a multi-tenant SaaS
 - [ ] It should be able to update an organization;
 - [ ] It should be able to shutdown an organization;
 - [ ] It should be able to transfer organization ownership;
+- [x] Must be able to verify ownership of a domain in the DNS record;
 
 ### Invites
 

@@ -104,6 +104,9 @@ model Organization {
   createdAt                 DateTime @default(now()) @map("created_at")
   updatedAt                 DateTime @updatedAt @map("updated_at")
 
+  domainToken    String? @map("domain_token")
+  verifiedDomain Boolean @default(false) @map("verified_domain")
+
   owner   User   @relation(fields: [ownerId], references: [id])
   ownerId String @map("owner_id")
 

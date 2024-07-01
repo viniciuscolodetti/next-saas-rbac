@@ -1,3 +1,4 @@
+import { hash } from 'bcryptjs'
 import type { FastifyInstance } from 'fastify'
 import { ZodTypeProvider } from 'fastify-type-provider-zod'
 import z from 'zod'
@@ -27,6 +28,7 @@ export async function createOrganization(app: FastifyInstance) {
           response: {
             201: z.object({
               organizationId: z.string().uuid(),
+              domainVerificationToken: z.string().nullish(),
             }),
           },
         },
@@ -34,6 +36,8 @@ export async function createOrganization(app: FastifyInstance) {
       async (request, reply) => {
         const userId = await request.getCurrentUserId()
         const { name, domain, shouldAttachUsersByDomain } = request.body
+
+        let domainVerificationToken = null
 
         if (domain) {
           const organizationByDomain = await prisma.organization.findUnique({
@@ -45,6 +49,8 @@ export async function createOrganization(app: FastifyInstance) {
               'Another organization with same domain already existis.',
             )
           }
+
+          domainVerificationToken = await hash(name, 6)
         }
 
         const organization = await prisma.organization.create({
@@ -60,10 +66,13 @@ export async function createOrganization(app: FastifyInstance) {
                 role: 'ADMIN',
               },
             },
+            domainToken: domainVerificationToken,
           },
         })
 
-        return reply.status(201).send({ organizationId: organization.id })
+        return reply
+          .status(201)
+          .send({ organizationId: organization.id, domainVerificationToken })
       },
     )
 }

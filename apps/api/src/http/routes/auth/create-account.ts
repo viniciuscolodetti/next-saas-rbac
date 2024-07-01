@@ -38,6 +38,7 @@ export async function createAccount(app: FastifyInstance) {
         where: {
           domain,
           shouldAttachUsersByDomain: true,
+          verifiedDomain: true,
         },
       })
 
