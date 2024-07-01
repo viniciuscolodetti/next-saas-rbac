@@ -14,7 +14,7 @@ export async function verifyDomain(app: FastifyInstance) {
     .withTypeProvider<ZodTypeProvider>()
     .register(auth)
     .post(
-      '/organization/verify-domain',
+      '/organizations/verify-domain',
       {
         schema: {
           tags: ['organizations'],
