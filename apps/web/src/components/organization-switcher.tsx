@@ -19,24 +19,24 @@ export async function OrganizationSwitcher() {
   const currentOrg = getCurrentOrg()
   const { organizations } = await getOrganizations()
 
-  const currentOrganizations = organizations.find(
+  const currentOrganization = organizations.find(
     (org) => org.slug === currentOrg,
   )
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="flex w-[168px] items-center gap-2 rounded p-1 text-sm font-medium outline-none focus-visible:ring-2 focus-visible:ring-primary">
-        {currentOrganizations ? (
+        {currentOrganization ? (
           <>
-            <Avatar className="mr-2 size-4">
-              {currentOrganizations.avatarUrl && (
-                <AvatarImage src={currentOrganizations.avatarUrl} />
+            <Avatar className="size-4">
+              {currentOrganization.avatarUrl && (
+                <AvatarImage src={currentOrganization.avatarUrl} />
               )}
 
               <AvatarFallback />
             </Avatar>
             <span className="truncate text-left">
-              {currentOrganizations.name}
+              {currentOrganization.name}
             </span>
           </>
         ) : (
