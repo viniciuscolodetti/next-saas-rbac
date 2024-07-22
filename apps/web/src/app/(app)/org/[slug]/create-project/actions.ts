@@ -10,7 +10,9 @@ const projectSchema = z.object({
   name: z
     .string()
     .min(4, { message: 'Please, include at least 4 characters.' }),
-  description: z.string(),
+  description: z
+    .string()
+    .min(4, { message: 'Please, include a project description.' }),
 })
 
 export async function createProjectAction(data: FormData) {
