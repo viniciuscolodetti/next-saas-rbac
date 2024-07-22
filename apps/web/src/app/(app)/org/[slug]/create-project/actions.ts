@@ -1,6 +1,7 @@
 'use server'
 
 import { HTTPError } from 'ky'
+import { revalidateTag } from 'next/cache'
 import z from 'zod'
 
 import { getCurrentOrg } from '@/auth/auth'
@@ -16,6 +17,7 @@ const projectSchema = z.object({
 })
 
 export async function createProjectAction(data: FormData) {
+  const currentOrg = getCurrentOrg()
   const result = projectSchema.safeParse(Object.fromEntries(data))
 
   if (!result.success) {
@@ -28,10 +30,12 @@ export async function createProjectAction(data: FormData) {
 
   try {
     await createProject({
-      org: getCurrentOrg()!,
+      org: currentOrg!,
       name,
       description,
     })
+
+    revalidateTag(`${currentOrg}/projects`)
   } catch (err) {
     if (err instanceof HTTPError) {
       const { message } = await err.response.json()
