@@ -47,8 +47,6 @@ export async function signUpAction(data: FormData) {
       return { success: false, message, errors: null }
     }
 
-    console.error(err)
-
     return {
       success: false,
       message: 'Unexpected error, try again in a few minutes.',

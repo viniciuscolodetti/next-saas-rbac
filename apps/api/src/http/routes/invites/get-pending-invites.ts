@@ -13,7 +13,7 @@ export async function getPendingInvites(app: FastifyInstance) {
     .withTypeProvider<ZodTypeProvider>()
     .register(auth)
     .get(
-      '/pending-invites/:inviteId',
+      '/pending-invites',
       {
         schema: {
           tags: ['invites'],

@@ -12,7 +12,7 @@ export async function acceptInvite(app: FastifyInstance) {
     .withTypeProvider<ZodTypeProvider>()
     .register(auth)
     .post(
-      '/invite/:inviteId/accept',
+      '/invites/:inviteId/accept',
       {
         schema: {
           tags: ['invites'],

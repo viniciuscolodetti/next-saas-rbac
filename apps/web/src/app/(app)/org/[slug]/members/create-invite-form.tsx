@@ -41,9 +41,9 @@ export function CreateInviteForm() {
             placeholder="john@example.com"
           />
 
-          {errors?.name && (
+          {errors?.email && (
             <p className="text-xs font-medium text-red-500 dark:text-red-400">
-              {errors.name[0]}
+              {errors.email[0]}
             </p>
           )}
         </div>
